@@ -6,6 +6,7 @@ import (
 
 type Token int
 
+//go:generate stringer -type Token
 const (
 	Lparen Token = iota
 	Rparen
@@ -64,7 +65,7 @@ func (s *Scanner) Scan() (Token, string, error) {
 			return EOF, "", errors.New("unterminated string literal")
 		}
 		s.pos++
-		return String, string(s.src[start:s.pos]), nil
+		return String, string(s.src[start+1 : s.pos-1]), nil
 	case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.':
 		start := s.pos
 		for s.pos < len(s.src) && isNum(s.src[s.pos]) {

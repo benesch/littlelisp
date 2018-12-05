@@ -37,7 +37,7 @@ func (s *Symbol) String() string {
 }
 
 func (s *String) String() string {
-	return s.Str
+	return `"` + s.Str + `"`
 }
 
 func (n *Number) String() string {
